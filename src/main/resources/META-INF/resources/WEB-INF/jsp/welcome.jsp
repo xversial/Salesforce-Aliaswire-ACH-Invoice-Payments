@@ -42,21 +42,27 @@
         <%--<h1>Spring Boot Web JSP Example</h1>--%>
         <%--<h2>Message: ${message}</h2>--%>
     <%--</div>--%>
-    <form>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">@</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    <form action="/api/v1.0/payments/make" method="post" id="ach-payment-form">
+
+        <div class="form-group">
+            <label for="accountNumber">Account Number</label>
+            <input type="number" class="form-control" id="accountNumber" aria-describedby="accountNumberHelp" placeholder="">
+            <small id="accountNumberHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+            <label for="routingNumber">Routing Number</label>
+            <input type="number" class="form-control" id="routingNumber" placeholder="" required>
+        </div>
+        <div class="form-group">
+            <label for="accountType">Account Type</label>
+            <select name="accountType" id="accountType" class="custom-select">
+                <option selected>Select bank account type</option>
+                <option value="1">Checking</option>
+                <option value="2">Savings</option>
+            </select>
         </div>
 
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">@example.com</span>
-            </div>
-        </div>
-
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 </div>
