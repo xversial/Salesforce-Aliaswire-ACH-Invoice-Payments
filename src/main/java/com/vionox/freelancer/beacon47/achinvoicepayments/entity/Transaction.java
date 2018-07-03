@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
  * @author Brandon Xversial
  */
 
-@Entity
+//@Entity
 public class Transaction {
     private static final Logger LOG = LoggerFactory.getLogger(Transaction.class);
 
