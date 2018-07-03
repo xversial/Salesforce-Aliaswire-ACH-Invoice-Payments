@@ -42,23 +42,23 @@
         <%--<h1>Spring Boot Web JSP Example</h1>--%>
         <%--<h2>Message: ${message}</h2>--%>
     <%--</div>--%>
-    <form action="/api/v1.0/payments/make" method="post" id="ach-payment-form">
+    <form action="/api/v1.0/payments/make" method="post" id="ach-payment-form" enctype="application/json">
 
         <div class="form-group">
-            <label for="accountNumber">Account Number</label>
-            <input type="number" class="form-control" id="accountNumber" aria-describedby="accountNumberHelp" placeholder="">
-            <small id="accountNumberHelp" class="form-text text-muted"></small>
+            <label for="AccountNumber">Account Number</label>
+            <input type="number" class="form-control" id="AccountNumber" aria-describedby="AccountNumberHelp" placeholder="" required>
+            <small id="AccountNumberHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group">
-            <label for="routingNumber">Routing Number</label>
-            <input type="number" class="form-control" id="routingNumber" placeholder="" required>
+            <label for="RoutingNumber">Routing Number</label>
+            <input type="number" class="form-control" id="RoutingNumber" placeholder="" required>
         </div>
         <div class="form-group">
-            <label for="accountType">Account Type</label>
-            <select name="accountType" id="accountType" class="custom-select">
-                <option selected>Select bank account type</option>
-                <option value="1">Checking</option>
-                <option value="2">Savings</option>
+            <label for="AccountType">Account Type</label>
+            <select name="AccountType" id="AccountType" class="custom-select" required>
+                <option value="" disabled selected>Select bank account type</option>
+                <option value="CHECKING">Checking</option>
+                <option value="SAVINGS">Savings</option>
             </select>
         </div>
 
@@ -67,6 +67,7 @@
 
 </div>
 
+<!-- Start Bootstrap Dependencies -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
@@ -76,7 +77,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+<!-- End Bootstrap Dependencies -->
+
+<!-- AliasWire Dependencies -->
 <script src="https://staging.aliaswire.com/bills-staging/script/awapi/transactionservice/v3.do"></script>
+
+<!-- Application Script Dependencies -->
+<c:url value="/js/app.js" var="jstlJS"/>
+<script src="${jstlJS}"></script>
 
 </body>
 
