@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.vionox.freelancer.beacon47</groupId>
+    <artifactId>ach-invoice-payments</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>ach-invoice-payments</name>
+    <description>Demo project for Spring Boot</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.3.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <trinityParentDir>${basedir}</trinityParentDir>
+
+        <version.java.jdk>1.8</version.java.jdk>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+        <!-- Regarding the additional Javadoc parameters below:
+            - The first two options are inherited from the base pom
+            - The -Xdoclint:-reference option is currently necessary because we have broken references in our Javadoc, see CWD-4528
+            - The -tag * options are necessary because of custom WADL-related tags in TokenResource, see CWD-4527
+        -->
+        <javadoc.additional.params>-Xdoclint:all -Xdoclint:-missing -Xdoclint:-reference -tag
+            request.representation.qname:X -tag response.representation.200.qname:X -tag
+            response.representation.200.mediaType:X -tag response.representation.200.doc:X -tag
+            response.representation.400.doc:X -tag response.representation.403.doc:X
+        </javadoc.additional.params>
+
+        <!-- Versioning info for common infrastructure -->
+        <commons.codec.version>1.10</commons.codec.version>
+        <commons.lang3.version>3.5</commons.lang3.version>
+        <commons.cli.version>1.3.1</commons.cli.version>
+        <commons.io.version>2.5</commons.io.version>
+        <apache.httpcomponents.version>4.5.3</apache.httpcomponents.version>
+
+        <gson.version>2.8.0</gson.version>
+        <redis.lettuce.version>4.3.0.Final</redis.lettuce.version>
+        <reactivex.version>2.0.5</reactivex.version>
+        <junit.version>4.12</junit.version>
+        <junit.platform.version>1.0.0-M3</junit.platform.version>
+        <junit.jupiter.version>5.0.0-M3</junit.jupiter.version>
+        <junit.vintage.version>${junit.version}.0-M3</junit.vintage.version>
+        <log4j2.version>2.8</log4j2.version>
+        <slf4jVersion>1.7.22</slf4jVersion>
+        <logbackVersion>1.1.7</logbackVersion>
+        <jackson1Version>1.9.13</jackson1Version>
+        <jackson2Version>2.8.5</jackson2Version>
+        <springVersion>3.2.13.RELEASE</springVersion>
+        <flumeVersion>1.7.0</flumeVersion>
+        <disruptorVersion>3.3.6</disruptorVersion>
+        <conversantDisruptorVersion>1.2.8-JDK7</conversantDisruptorVersion>
+        <versions.plugin.version>2.3</versions.plugin.version>
+        <compiler.plugin.version>3.6.0</compiler.plugin.version>
+        <pmd.plugin.version>3.7</pmd.plugin.version>
+        <findbugs.plugin.version>3.0.4</findbugs.plugin.version>
+        <changes.plugin.version>2.12.1</changes.plugin.version>
+        <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
+        <!-- surefire.plugin.version 2.18 yields http://jira.codehaus.org/browse/SUREFIRE-1121, which is fixed in 2.18.1 -->
+        <!-- surefire.plugin.version 2.19 yields https://issues.apache.org/jira/browse/SUREFIRE-1193. -->
+        <surefire.plugin.version>2.19.1</surefire.plugin.version>
+        <failsafe.plugin.version>2.19.1</failsafe.plugin.version>
+        <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+        <rat.plugin.version>0.12</rat.plugin.version>
+        <pdf.plugin.version>1.2</pdf.plugin.version>
+        <cobertura.plugin.version>2.7</cobertura.plugin.version>
+        <jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
+        <release.plugin.version>2.5.3</release.plugin.version>
+        <scm.plugin.version>1.9.5</scm.plugin.version>
+        <jxr.plugin.version>2.5</jxr.plugin.version>
+        <clirr.plugin.version>2.8</clirr.plugin.version>
+        <site.plugin.version>3.4</site.plugin.version>
+        <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
+        <manifestfile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestfile>
+        <maven.compile.source>1.8</maven.compile.source>
+        <maven.compile.target>1.8</maven.compile.target>
+        <docLabel>Site Documentation</docLabel>
+        <projectDir/>
+        <commonsLoggingVersion>1.2</commonsLoggingVersion>
+        <osgi.api.version>4.3.1</osgi.api.version>
+        <activemq.version>5.14.1</activemq.version>
+        <!-- Allow Clirr severity to be overriden by the command-line option -DminSeverity=level -->
+        <minSeverity>info</minSeverity>
+        <jctoolsVersion>1.2.1</jctoolsVersion>
+        <mockitoVersion>2.2.7</mockitoVersion>
+        <argLine>-Xms256m -Xmx1024m</argLine>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Web with Tomcat + Embed -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+        <!-- Need this to compile JSP -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4jVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-remote-resources-plugin</artifactId>
+                    <version>${remote.resources.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <!--  Using version 2.5.4 causes Jenkins to get compiler errors in log4j-perf. -->
+                    <version>3.2.0</version>
+                    <inherited>true</inherited>
+                    <extensions>true</extensions>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>manifest</goal>
+                            </goals>
+                            <phase>process-classes</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-changes-plugin</artifactId>
+                    <version>${changes.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${release.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>${scm.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${checkstyle.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${javadoc.plugin.version}</version>
+                    <configuration>
+                        <bottom><![CDATA[<p align="center">Copyright &#169; {inceptionYear}-{currentYear} {organizationName}. All Rights Reserved.<br />
+            Apache Logging, Apache Log4j, Log4j, Apache, the Apache feather logo, the Apache Logging project logo,
+            and the Apache Log4j logo are trademarks of The Apache Software Foundation.</p>]]></bottom>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${pmd.plugin.version}</version>
+                </plugin>
+                <!-- some nice default compiler options -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compile.source}</source>
+                        <target>${maven.compile.target}</target>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                        <encoding>UTF-8</encoding>
+                        <fork>true</fork>
+                        <meminitial>256</meminitial>
+                        <maxmem>2048</maxmem>
+                        <compilerArguments>
+                            <Xmaxwarns>10000</Xmaxwarns>
+                            <Xlint/>
+                        </compilerArguments>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <!-- disable annotation processing for first pass -->
+                            <id>default-compile</id>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <phase>compile</phase>
+                            <configuration>
+                                <proc>none</proc>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <!-- then do a processing-only pass to generate plugins .dat file -->
+                            <id>process-plugins</id>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <phase>process-classes</phase>
+                            <configuration>
+                                <proc>only</proc>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${failsafe.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>${jxr.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>clirr-maven-plugin</artifactId>
+                    <version>${clirr.plugin.version}</version>
+                    <configuration>
+                        <minSeverity>${minSeverity}</minSeverity>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>4.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- Base -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-sitecss</id>
+                        <!-- fetch site.xml before creating site documentation -->
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${trinityParentDir}/src/main/resources</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.awt.headless>true</java.awt.headless>
+                    </systemPropertyVariables>
+                    <forkCount>2C</forkCount>
+                    <reuseForks>true</reuseForks>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>${junit.platform.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>${junit.jupiter.version}</version>
+                    </dependency>
+                    <!--<dependency>-->
+                    <!--<groupId>org.junit.vintage</groupId>-->
+                    <!--<artifactId>junit-vintage-engine</artifactId>-->
+                    <!--<version>${junit.vintage.version}</version>-->
+                    <!--</dependency>-->
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${failsafe.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>integration-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.awt.headless>true</java.awt.headless>
+                    </systemPropertyVariables>
+                    <argLine>-Xms256m -Xmx1024m</argLine>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${site.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-ssh</artifactId>
+                        <version>2.10</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!-- only build English site even on other language OS -->
+                    <locales>en</locales>
+                    <!-- Exclude the navigation file for Maven 1 sites
+                         and the changes file used by the changes-plugin,
+                         as they interfere with the site generation. -->
+                    <moduleExcludes>
+                        <xdoc>navigation.xml,changes.xml</xdoc>
+                    </moduleExcludes>
+                    <templateDirectory>${trinityParentDir}/src/site</templateDirectory>
+                    <template>site.vm</template>
+                </configuration>
+            </plugin>
+            <!-- <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>cobertura-maven-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>clean</id>
+                  <goals>
+                    <goal>clean</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin> -->
+            <!-- We need to disable the standard ASF configuration to be able to publish our own notice and license files -->
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-remote-resources-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>process</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<skip>true</skip>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pdf-plugin</artifactId>
+                <version>${pdf.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>pdf</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>pdf</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- RAT report -->
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <version>${rat.plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <!-- Matches other RAT configurations in this POM -->
+                        <exclude>src/main/resources/META-INF/services/**/*</exclude>
+                        <!-- IntelliJ files -->
+                        <exclude>.idea/**/*</exclude>
+                        <exclude>src/test/resources/**/*</exclude>
+                        <!-- VM metadata -->
+                        <exclude>.vagrant/**/*</exclude>
+                        <!-- IDE settings imports -->
+                        <exclude>src/ide/**</exclude>
+                        <!-- does it even make sense to apply a license to a GPG signature? -->
+                        <exclude>**/*.asc</exclude>
+                        <!-- jQuery is MIT-licensed, but RAT can't figure it out -->
+                        <exclude>src/site/resources/js/jquery.js</exclude>
+                        <exclude>src/site/resources/js/jquery.min.js</exclude>
+                        <!-- Generated files -->
+                        <exclude>log4j-distribution/target/**/*</exclude>
+                        <exclude>log4j-distribution/.project</exclude>
+                        <exclude>log4j-distribution/.settings/**</exclude>
+                        <exclude>velocity.log</exclude>
+                        <!-- Other -->
+                        <exclude>felix-cache/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <!-- End Base -->
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
