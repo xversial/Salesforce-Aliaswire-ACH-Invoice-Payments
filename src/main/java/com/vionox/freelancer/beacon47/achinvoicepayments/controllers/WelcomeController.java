@@ -1,4 +1,4 @@
-package com.vionox.freelancer.beacon47.achinvoicepayments;
+package com.vionox.freelancer.beacon47.achinvoicepayments.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,15 +21,9 @@ public class WelcomeController {
     @Value("${welcome.message:test}")
     private String message = "Hello World";
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = {RequestMethod.GET})
     public String welcome(Map<String, Object> model) {
         model.put("message", this.message);
         return "welcome";
-    }
-
-    @RequestMapping(value="/api/v1.0/payments/make", method = RequestMethod.POST)
-    public String achMakePayment(@RequestBody String jsonString)
-    {
-        return null;
     }
 }
