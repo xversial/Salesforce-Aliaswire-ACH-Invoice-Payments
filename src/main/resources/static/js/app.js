@@ -45,31 +45,16 @@ function __awGetToken(form) {
 function __awResponse(obj, resultCode, detailReason, str, httpStatus) {
     if (resultCode == "A000") {
         var token = obj.getToken();
-        /*
-        $('#sccmsg').html('<b> SUCCESS : ' + obj.getToken().getNumber() + '</b>');
-        var info = "<br><span>";
-        info = info + str + "</span>";
-        $('#sccmsg').append(info);
-        $('#sccmsg').css('display', 'block');
-        $('#sccmsg').delay(10000).fadeOut();
-        */
-
-
         var data = {
-            payment: {
-                method: 'ACH',
-                account: {
-                    // type: accountType.val(),
-                },
-                token: token.getNumber(),
-            },
-            // email: email.val()
+            resultCode: resultCode,
+            FundingAccount: {
+                type: 'ACH',
+                number: token.getNumber(),
+                display: token.getDisplay(),
+                address: token.getAddress()
+            }
         };
         sendData(data);
-
-        //////////////////////////////////////////////////
-        // alert("Token = " + obj.getToken().getNumber());
-        //////////////////////////////////////////////////
     } else
 
     {
