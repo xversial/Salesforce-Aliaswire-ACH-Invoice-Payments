@@ -81,7 +81,7 @@
 <!-- End Bootstrap Dependencies -->
 
 <!-- AliasWire Dependencies -->
-<script src="https://staging.aliaswire.com/bills-staging/script/awapi/transactionservice/v3.do"></script>
+<script src="https://staging.aliaswire.com/bills/script/awapi/transactionservice/v3.do"></script>
 
 <!-- Application Script Dependencies -->
 <c:url value="/js/app.js" var="jstlJS"/>
