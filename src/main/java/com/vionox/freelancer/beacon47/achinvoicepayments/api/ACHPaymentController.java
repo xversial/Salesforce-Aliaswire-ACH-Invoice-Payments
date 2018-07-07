@@ -3,6 +3,7 @@ package com.vionox.freelancer.beacon47.achinvoicepayments.api;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.vionox.freelancer.beacon47.achinvoicepayments.entity.FundingAccount;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +27,8 @@ public class ACHPaymentController {
     {
         try {
             ObjectNode node = mapper.readValue(jsonString, ObjectNode.class);
-            JsonNode payment = node.get("payment");
-            String token = payment.get("token").asText();
-            LOG.info(token);
+            FundingAccount fundingAccount = mapper.readerFor(FundingAccount.class).readValue(node.get("FundingAccount"));
+            LOG.info(fundingAccount.getToken());
         } catch (IOException ex) {
             LOG.warn(ExceptionUtils.getStackTrace(ex));
         }
