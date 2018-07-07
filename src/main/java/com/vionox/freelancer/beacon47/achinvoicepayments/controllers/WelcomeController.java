@@ -17,13 +17,8 @@ import java.util.Map;
 public class WelcomeController {
     private static final Logger LOG = LoggerFactory.getLogger(WelcomeController.class);
 
-    // inject via application.properties
-    @Value("${welcome.message:test}")
-    private String message = "Hello World";
-
     @RequestMapping(value = "/", method = {RequestMethod.GET})
     public String welcome(Map<String, Object> model) {
-        model.put("message", this.message);
         return "welcome";
     }
 }
