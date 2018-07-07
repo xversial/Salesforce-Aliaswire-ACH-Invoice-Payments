@@ -42,17 +42,6 @@ public class FundingAccount implements Serializable {
     this.address = address;
   }
 
-  @JsonCreator
-  public FundingAccount(
-      @JsonProperty("number") String token,
-      @JsonProperty("display") String name,
-      @JsonProperty("address") Address address) {
-    this.type = AccountType.CREDIT_CARD;
-    this.token = token;
-    this.name = name;
-    this.address = address;
-  }
-
   public String getToken() {
     return token;
   }
