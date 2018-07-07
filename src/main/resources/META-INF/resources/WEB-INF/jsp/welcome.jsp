@@ -46,12 +46,12 @@
 
         <div class="form-group">
             <label for="AccountNumber">Account Number</label>
-            <input type="number" class="form-control" id="AccountNumber" aria-describedby="AccountNumberHelp" placeholder="" required>
+            <input type="number" class="form-control" id="AccountNumber" aria-describedby="AccountNumberHelp" placeholder="" value="000123456789" required>
             <small id="AccountNumberHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group">
             <label for="RoutingNumber">Routing Number</label>
-            <input type="number" class="form-control" id="RoutingNumber" placeholder="" required>
+            <input type="number" class="form-control" id="RoutingNumber" placeholder="" value="091000019" required>
         </div>
         <div class="form-group">
             <label for="AccountType">Account Type</label>
