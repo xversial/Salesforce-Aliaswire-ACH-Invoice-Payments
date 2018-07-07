@@ -83,7 +83,14 @@ function sendData(data)
         dataType: "json",
         contentType: "application/json"
     }).done(function (response) {
-        console.log(response);
+        $("#ach-payment-form").hide();
+
+        var resp = "";
+
+        resp = resp + ("<h1>Payment Success!</h1>");
+        resp = resp + ("<p>Transaction id = "+ response["tv3.baseTransactionResponse"].transactionId +"</p>");
+        $("#response-container").html(resp);
+
     });
 }
 
