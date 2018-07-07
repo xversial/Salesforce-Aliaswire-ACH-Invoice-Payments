@@ -3,7 +3,10 @@ package com.vionox.freelancer.beacon47.achinvoicepayments.api;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.vionox.freelancer.beacon47.achinvoicepayments.AliasWirePayment;
+import com.vionox.freelancer.beacon47.achinvoicepayments.entity.AccountType;
 import com.vionox.freelancer.beacon47.achinvoicepayments.entity.FundingAccount;
+import com.vionox.freelancer.beacon47.achinvoicepayments.entity.TxnAmount;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +32,12 @@ public class ACHPaymentController {
             ObjectNode node = mapper.readValue(jsonString, ObjectNode.class);
             FundingAccount fundingAccount = mapper.readerFor(FundingAccount.class).readValue(node.get("FundingAccount"));
             LOG.info(fundingAccount.getToken());
+
+            TxnAmount amount = new TxnAmount(119.99, "USD");
+
+            String response = AliasWirePayment.makePayment(fundingAccount, amount);
+
+            return response;
         } catch (IOException ex) {
             LOG.warn(ExceptionUtils.getStackTrace(ex));
         }
