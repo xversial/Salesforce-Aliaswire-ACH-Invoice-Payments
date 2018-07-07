@@ -42,6 +42,9 @@
         <%--<h1>Spring Boot Web JSP Example</h1>--%>
         <%--<h2>Message: ${message}</h2>--%>
     <%--</div>--%>
+
+        <div id="response-container"></div>
+
     <form action="/api/v1.0/payments/make" method="post" id="ach-payment-form" enctype="application/json">
 
         <div class="form-group">
