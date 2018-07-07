@@ -44,7 +44,6 @@ function __awGetToken(form) {
 }
 function __awResponse(obj, resultCode, detailReason, str, httpStatus) {
     if (resultCode == "A000") {
-        debugger;
         var token = obj.getToken();
         /*
         $('#sccmsg').html('<b> SUCCESS : ' + obj.getToken().getNumber() + '</b>');
