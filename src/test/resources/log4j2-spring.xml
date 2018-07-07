@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Part of the ach-invoice-payments project.
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ Copyright (C) Brandon Donaly - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Brandon Xversial <xversial@vionox.com>, July 2018
+  -->
+
 <Configuration status="WARN">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">

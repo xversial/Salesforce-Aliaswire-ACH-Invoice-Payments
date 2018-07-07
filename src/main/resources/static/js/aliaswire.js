@@ -15,6 +15,17 @@
 
 
 
+/*
+ * Part of the ach-invoice-payments project.
+ *
+ * NOTICE OF LICENSE
+ *
+ * Copyright (C) Brandon Donaly - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Brandon Xversial <xversial@vionox.com>, July 2018
+ */
+
 AWAPI = function AWAPI() {
   var self = this;
   var resultCode = 'I001_07/06/2018 20:10:21';

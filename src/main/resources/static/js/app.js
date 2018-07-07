@@ -1,3 +1,14 @@
+/*
+ * Part of the ach-invoice-payments project.
+ *
+ * NOTICE OF LICENSE
+ *
+ * Copyright (C) Brandon Donaly - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Brandon Xversial <xversial@vionox.com>, July 2018
+ */
+
 var PUBLIC_ALIAS_WIRE_KEY = 'pk_test_59a973aa4b8bf9fa80bea9fd9cbd4ec8bf619b7fc6720320e3424178';
 var serverAPIEndpoint = null;
 
