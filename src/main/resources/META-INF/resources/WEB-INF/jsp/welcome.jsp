@@ -59,6 +59,7 @@
                 <option value="" disabled selected>Select bank account type</option>
                 <option value="CHECKING">Checking</option>
                 <option value="SAVINGS">Savings</option>
+                <option value="BIZCHECKING">Business Checking</option>
             </select>
         </div>
 
