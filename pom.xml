@@ -120,6 +120,25 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.axis</groupId>
+            <artifactId>axis</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+
+        <!--<dependency>-->
+            <!--<groupId>javax</groupId>-->
+            <!--<artifactId>javaee-api</artifactId>-->
+            <!--<version>8.0</version>-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+        <!--</dependency>-->
+
 
         <!-- Web with Tomcat + Embed -->
         <dependency>
@@ -375,6 +394,43 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.14.0</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemas>
+                        <schema>
+                            <url>https://staging.aliaswire.com/bills/ws/transactionservice/v3?wsdl</url>
+
+                            <fileset>
+                                <excludes>
+                                    <exclude>*.xsd</exclude>
+                                </excludes>
+                            </fileset>
+                        </schema>
+                        <!--<schema><url>https://staging.aliaswire.com/bills/ws/transactionservice/v3?xsd=META-INF/schema/common.xsd</url></schema>-->
+                        <!--<schema><url>https://staging.aliaswire.com/bills/ws/transactionservice/v3?xsd=META-INF/schema/common_v3.xsd</url></schema>-->
+                        <!--<schema><url>https://staging.aliaswire.com/bills/ws/transactionservice/v3?xsd=META-INF/schema/transaction/transaction_v3.xsd</url></schema>-->
+                        <!--<schema><url>https://staging.aliaswire.com/bills/ws/transactionservice/v3?xsd=META-INF/schema/bpp/bpp_v3.xsd</url></schema>-->
+                    </schemas>
+                    <schemaLanguage>WSDL</schemaLanguage>
+                    <generatePackage>mywsdl.wsdl</generatePackage>
+                    <forceRegenerate>true</forceRegenerate>
+                    <strict>false</strict>
+                    <args>
+                        <arg>-XautoNameResolution</arg>
+                    </args>
+                </configuration>
+            </plugin>
             <!-- Base -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
