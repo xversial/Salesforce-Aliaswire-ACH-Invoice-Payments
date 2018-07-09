@@ -16,8 +16,8 @@
 
     <groupId>com.vionox.freelancer.beacon47</groupId>
     <artifactId>ach-invoice-payments</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>0.0.2-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <name>ach-invoice-payments</name>
     <description>Demo project for Spring Boot</description>
@@ -608,7 +608,15 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>${basedir}/src/main/resources/META-INF/resources</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
